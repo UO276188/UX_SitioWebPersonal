@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+<head>
+	<!-- Datos que describen el documento -->
+	<meta charset="UTF-8" />
+	
+	<!--Metadatos de los documentos HTML5-->
+	<meta name ="author" content ="Sara María Ramírez Pérez" />
+	<meta name ="description" content ="Página personal." />
+	<meta name ="keywords" content ="blog,personal" />
+
+	<!--Definición de la ventana gráfica-->
+	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
+	
+	<title>Mi página personal - Inicio</title>
+
+	<!--Hojas de estilo-->
+	<link rel="stylesheet" type="text/css" href="estilo.css" />
+
+	
+</head>
+
+<body>
+	<header> 
+		<h1>Mi página personal</h1>
+	</header>
+	
+	<nav> 
+		<ul>
+			<li><a href="index.html" >Inicio</a></li>
+			<li><a href="aficiones.html" >Aficiones</a></li>
+			<li><a href="proyectos.html" >Proyectos</a></li>
+		</ul>
+	</nav>
+
+	<main>
+			
+		<h2>Datos Personales</h2>
+		<dl>
+			<dt>Nombre:</dt>
+			<dd>Sara María</dd>
+			<dt>Apellidos:</dt>
+			<dd>Ramírez Pérez</dd>
+			<dt>Correo electrónico:</dt>
+			<dd><a href="mailto:uo276188@uniovi.es">uo276188@uniovi.es</a></dd>
+			<dt>Más información:</dt>
+			<dd>Soy alumna del Máster en Ingeniería Web de la Universidad de Oviedo.</dd>
+		</dl>
+
+		<picture>
+			<source media="(max-width:799px)" srcset="multimedia/sara-200.jpg">
+			<source media="(min-width:800px)" srcset="multimedia/sara-600.jpg">
+			<img src="multimedia/sara.jpg" alt="Imagen personal" />
+		</picture>
+		
+	</main>
+	
+	<footer>
+		<img src="multimedia/HTML5.png" alt="HTML5 Válido!" />
+		<img src="multimedia/CSS3.png"  alt="CSS Válido!"  />
+		<p>ECW Septiembre, 2025</p>
+		<p>Copyright @2025 Sara María Ramírez Pérez</p>
+	</footer>	
+</body>
+</html>

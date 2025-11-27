@@ -1,0 +1,92 @@
+/********** 
+	Sara María Ramírez Pérez - UO276188 
+	Estilos comunes a todo el sitio web
+**********/
+
+/*Especificidad: 001*/
+body {
+	font-family: Georgia, Thaoma, serif;
+	color: #545454;
+	background-color: #fff;
+	justify-self: stretch;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	grid-template-areas: 
+	"header header"
+	"nav main"
+	"footer footer";
+	column-gap: 1em;
+	row-gap: 1em;
+}
+/*Especificidad: 002*/
+body header{
+	grid-area: header;
+	justify-self: stretch;
+	align-self: stretch;
+	justify-items: center;
+}
+/*Especificidad: 002*/
+body main{
+	grid-area: main;
+	justify-items: stretch;
+}
+
+
+/*Especificidad: 001*/
+h1 {
+	color: #E3E3E3;    
+	background-color:#064260; 
+	text-transform: uppercase;
+	padding: 2em; 
+}
+/*Especificidad: 001*/ 
+h2 {
+	color: #E3E3E3;
+	background-color:#670A30; 
+	padding: 0.5em;
+}
+
+/*Especificidad: 002*/
+body nav {
+	background-color: #FDEAF2;
+	color: black;
+	grid-area: nav;
+	justify-self: stretch;
+}
+/*Especificidad: 002*/
+nav li{
+	list-style-type: none;
+	padding: 0.5em;
+}
+
+/*Especificidad: 002*/
+nav a{
+	background-color: #FDEAF2;
+	color: black;
+}
+
+/*Especificidad: 012*/
+nav a:hover {
+	color: #FDEAF2;
+	background-color: #670A30;
+}
+/*Especificidad: 002*/
+body footer{
+	background-color: #063851;
+	color: #C4C4C4;
+	grid-area: footer;
+}	
+/*Especificidad: 004*/
+body main pre code{
+	color: #000;
+	background-color: rgb(240, 230, 230);
+}
+/*Especificidad: 001*/
+li {
+	list-style-type: square;
+}
+
+/*Especificidad: 003*/
+body footer img{
+	width: 5vw;
+}
