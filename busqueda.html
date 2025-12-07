@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Búsqueda</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Resultados de búsqueda</h1>
+</header>
+
+<main>
+    <section class="resultados" hidden>
+        <h2>Coincidencias</h2>
+        <ul></ul>
+    </section>
+</main>
+
+<script src="buscador.js"></script>
+<script>
+    // Arrancar el buscador automáticamente al cargar la página
+    new Buscador("mapa.json", true);
+</script>
+
+</body>
+</html>
