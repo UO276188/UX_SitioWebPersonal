@@ -1,6 +1,7 @@
 class Buscador {
 
     constructor(mapaURL, modoResultados = false) {
+        console.print("Inicializando Buscador...");
         this.mapaURL = mapaURL;
         this.paginas = [];
 
@@ -26,6 +27,7 @@ class Buscador {
     }
 
     async cargarMapa() {
+        console.print("Cargando mapa");
         const respuesta = await fetch(this.mapaURL);
         const datos = await respuesta.json();
         this.paginas = datos.paginas;
