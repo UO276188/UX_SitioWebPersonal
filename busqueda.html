@@ -7,23 +7,43 @@
 </head>
 
 <body>
+    <header>
+        <h1>Resultados de búsqueda</h1>
+        
+        <form class="buscador" action="busqueda.html" method="get">
+            <label for="buscar">Buscar:</label>
+            <input type="search" name="q" placeholder="Buscar...">
+            <button type="submit" class="lupa">🔍</button>
+        </form>
+            
+        <p>
+            Idioma:
+            <button onclick="traduccion.setLanguage('es')">ES</button>
+            <button onclick="traduccion.setLanguage('en')">EN</button>
+        </p>
+    </header>
 
-<header>
-    <h1>Resultados de búsqueda</h1>
-</header>
+    <nav> 
+		<ul>
+			<li><a href="index.html" >Inicio</a></li>
+			<li><a href="aficiones.html" >Aficiones</a></li>
+			<li><a href="proyectos.html" >CV</a></li>
+			<li><a href="contacto.html" >Contacto</a></li>
+		</ul>
+	</nav>
 
-<main>
-    <section class="resultados" hidden>
-        <h2>Coincidencias</h2>
-        <ul></ul>
-    </section>
-</main>
+    <main>
+        <section class="resultados" hidden>
+            <h2>Coincidencias</h2>
+            <ul></ul>
+        </section>
+    </main>
 
-<script src="buscador.js"></script>
-<script>
-    // Arrancar el buscador automáticamente al cargar la página
-    new Buscador("mapa.json", true);
-</script>
+    <script src="buscador.js"></script>
+    <script>
+        // Arrancar el buscador automáticamente al cargar la página
+        new Buscador("mapa.json", true);
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Sara María Ramírez Pérez" />
+    <meta name="description" content="Página de contacto y retroalimentación." />
+    <meta name="keywords" content="Contacto, Feedback, Redes Sociales" />
+    <!--Definición de la ventana gráfica-->
+	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
+	
+	<title>Mi página personal - Contacto</title>
+
+	<!--Hojas de estilo-->
+	<link rel="stylesheet" type="text/css" href="estilo.css" />
+
+    <script type="module" src="./menuActivo.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Contacto</h1>
+        <form class="buscador" action="busqueda.html" method="get">
+			<label for="buscar">Buscar:</label>
+			<input type="search" name="q" placeholder="Buscar...">
+			<button type="submit" class="lupa">🔍</button>
+		</form>
+		
+		<p>
+			Idioma:
+			<button onclick="traduccion.setLanguage('es')">ES</button>
+			<button onclick="traduccion.setLanguage('en')">EN</button>
+		</p>
+    </header>
+
+    <nav> 
+		<ul>
+			<li><a href="index.html" >Inicio</a></li>
+			<li><a href="aficiones.html" >Aficiones</a></li>
+			<li><a href="proyectos.html" >CV</a></li>
+			<li><a href="contacto.html" >Contacto</a></li>
+		</ul>
+	</nav>
+
+    <main>
+        <!-- Información de contacto -->
+        <section>
+            <h2>Información de contacto</h2>
+            <p>Email: <a href="mailto:uo276188@uniovi.es">uo276188@uniovi.es</a></p>
+            <p>Ubicación: Avilés, Asturias</p>
+            <p>Sígueme en redes sociales:</p>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/sara-maría-ramírez-pérez" target="_blank">LinkedIn</a></li>
+                <li><a href="https://github.com/UO276188" target="_blank">GitHub</a></li>
+            </ul>
+        </section>
+
+        <!-- Formulario de retroalimentación -->
+        <section>
+            <h2>Retroalimentación</h2>
+            <p>Para cualquier comentario, sugerencia o consulta, puedes enviarme un correo a <a href="mailto:uo276188@uniovi.es">uo276188@uniovi.es</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <img src="multimedia/HTML5.png" alt="HTML5 Válido!" />
+        <img src="multimedia/CSS3.png" alt="CSS Válido!" />
+        <p>ECW Septiembre, 2025</p>
+        <p>Copyright @2025 Sara María Ramírez Pérez</p>
+    </footer>
+</body>
+</html>

@@ -90,3 +90,28 @@ li {
 body footer img{
 	width: 5vw;
 }
+
+nav[aria-label="Migas de pan"] ol {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+}
+
+nav[aria-label="Migas de pan"] li::after {
+    content: ">";
+    margin-left: 0.5rem;
+}
+
+nav[aria-label="Migas de pan"] li:last-child::after {
+    content: "";
+}
+
+nav[aria-label="Migas de pan"] a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+nav[aria-label="Migas de pan"] a:hover {
+    text-decoration: underline;
+}

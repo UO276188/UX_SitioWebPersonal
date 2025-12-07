@@ -7,45 +7,76 @@
 	
 	<!--Metadatos de los documentos HTML5-->
 	<meta name ="author" content ="Sara María Ramírez Pérez" />
-	<meta name ="description" content ="Página personal." />
-	<meta name ="keywords" content ="blog,personal" />
+	<meta name="description" content="Currículum y proyectos personales." />
+	<meta name="keywords" content="CV, Proyectos, Experiencia, Formación" />
 
 	<!--Definición de la ventana gráfica-->
 	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
 	
-	<title>Mi página personal - Proyectos</title>
+	<title>Mi página personal - CV</title>
 
 	<!--Hojas de estilo-->
 	<link rel="stylesheet" type="text/css" href="estilo.css" />
 
-	
+	<script type="module" src="./menuActivo.js"></script>
 </head>
 
 <body>
 	<header> 
-		<h1>Mis proyectos</h1>
+		<h1>Currículum y Proyectos</h1>
+
+		<form class="buscador" action="busqueda.html" method="get">
+			<label for="buscar">Buscar:</label>
+			<input type="search" name="q" placeholder="Buscar...">
+			<button type="submit" class="lupa">🔍</button>
+		</form>
+		
+		<p>
+			Idioma:
+			<button onclick="traduccion.setLanguage('es')">ES</button>
+			<button onclick="traduccion.setLanguage('en')">EN</button>
+		</p>
 	</header>
 	
 	<nav> 
 		<ul>
 			<li><a href="index.html" >Inicio</a></li>
 			<li><a href="aficiones.html" >Aficiones</a></li>
-			<li><a href="proyectos.html" >Proyectos</a></li>
+			<li><a href="proyectos.html" >CV</a></li>
+			<li><a href="contacto.html" >Contacto</a></li>
 		</ul>
 	</nav>
 
 
 	<main>
-		<h2>Proyectos de programación</h2>
-		<p>Mis proyectos desarrollados en el Grado de Ingeniería Informática del Software: </p>
+		<section>
+            <h2>Formación Académica</h2>
+            <ul>
+				<li>Máster Universitario en Ingeniería Web - Universidad de Oviedo (2024-Presente)</li>
+                <li>Grado en Ingeniería Informática del Software - Universidad de Oviedo (2019-2024)</li>
+                <li>Bachillerato Científico-Tecnológico - IES Ramón Menéndez Pidal (2017-2019)</li>
+            </ul>
+        </section>
 
-		<ul>
-			<li>ASW - <a href="https://github.com/UO276188/lomap_en1b" title="lomap_en1b">Lomap</a></li>
-			<li>Desarrollo de aplicaciones móviles - <a href="https://github.com/UO276188/vets-uo276188-dart-api" title="Vets">Vets</a></li>
-		</ul>
+		<section>
+            <h2>Experiencia Profesional</h2>
+            <ul>
+                <li>Profesora del Departamento de Informática - Universidad de Oviedo (2025)</li>
+                <li>Técnico de Ciberseguridad - Grupo Resnova (2024)</li>
+            </ul>
+        </section>
 
-		<h2>TFG</h2>
-		<p>Mi TFG trató sobre la realización de un ataque de phishing controlado en una empresa real para determinar el grado de preparación del personal de la empresa ante este tipo de ataques. </p>
+		<section>
+            <h2>Proyectos</h2>
+            <p>Mis proyectos desarrollados durante la carrera:</p>
+            <ul>
+				<li>ASW - <a href="https://github.com/UO276188/lomap_en1b" title="lomap_en1b">Lomap</a></li>
+				<li>Desarrollo de aplicaciones móviles - <a href="https://github.com/UO276188/vets-uo276188-dart-api" title="Vets">Vets</a></li>
+			</ul>
+
+			<h2>TFG</h2>
+			<p>Mi TFG trató sobre la realización de un ataque de phishing controlado en una empresa real para determinar el grado de preparación del personal de la empresa ante este tipo de ataques. </p>
+		</section>
 	</main>
 	
 	<footer>

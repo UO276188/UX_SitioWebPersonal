@@ -18,6 +18,8 @@
 	<!--Hojas de estilo-->
 	<link rel="stylesheet" type="text/css" href="estilo.css" />
 
+	<script type="module" src="/i18n/i18n.js"></script>
+	<script type="module" src="./menuActivo.js"></script>
 	
 </head>
 
@@ -29,13 +31,20 @@
 			<input type="search" name="q" placeholder="Buscar...">
 			<button type="submit" class="lupa">🔍</button>
 		</form>
+		
+		<p>
+			Idioma:
+			<button onclick="traduccion.setLanguage('es')">ES</button>
+			<button onclick="traduccion.setLanguage('en')">EN</button>
+		</p>
 	</header>
 	
 	<nav> 
 		<ul>
 			<li><a href="index.html" >Inicio</a></li>
 			<li><a href="aficiones.html" >Aficiones</a></li>
-			<li><a href="proyectos.html" >Proyectos</a></li>
+			<li><a href="proyectos.html" >CV</a></li>
+			<li><a href="contacto.html" >Contacto</a></li>
 		</ul>
 	</nav>
 
@@ -64,7 +73,7 @@
 	<footer>
 		<img src="multimedia/HTML5.png" alt="HTML5 Válido!" />
 		<img src="multimedia/CSS3.png"  alt="CSS Válido!"  />
-		<p>ECW Septiembre, 2025</p>
+		<p>Última edición: 7 Diciembre, 2025</p>
 		<p>Copyright @2025 Sara María Ramírez Pérez</p>
 	</footer>	
 </body>
