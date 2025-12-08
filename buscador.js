@@ -1,180 +1,194 @@
 class Buscador {
+    constructor(mapaURL) {
+        this.mapaURL = mapaURL;
+        this.paginas = [];
+        this.contenidos = {};
 
-    constructor(mapaURL, modoResultados = false) {
-        this.mapaURL = mapaURL;    // URL del JSON con páginas
-        this.paginas = [];          // Array para guardar las páginas cargadas
-        this.modoResultados = modoResultados; // true = busqueda.html
-
-        if (modoResultados) {
-            // Elementos de la sección de resultadoss
-            this.seccionResultados = document.querySelector("section.resultados");
-            this.lista = this.seccionResultados.querySelector("ul");
-
-            // Leer los parámetros de la URL (q=palabra)
-            const params = new URLSearchParams(window.location.search);
-            const q = params.get("q")?.trim().toLowerCase() || "";
-
-            // Búsqueda avanzada: separamos términos por espacios
-            this.terminos = q.split(/\s+/);
-
-            if (q.length > 0) {
-                // Espera a que el mapa se cargue antes de buscar
-                this.cargarMapa().then(() => this.iniciar());
-            }
-        } else {
-            this.form = document.querySelector("form.buscador");
-        }
+        document.addEventListener("DOMContentLoaded", () => this.init());
     }
 
-    /**
-    * Carga el JSON con la lista de páginas
-    */
+    async init() {
+        const params = new URLSearchParams(window.location.search);
+        this.query = params.get("q")?.trim();
+        if (!this.query) return; // no hacer nada si no hay búsqueda
+
+        await this.cargarMapa();
+        await this.cargarPaginas();
+        const resultados = this.buscar(this.query);
+        this.mostrarResultados(resultados);
+    }
+
     async cargarMapa() {
-        const respuesta = await fetch(this.mapaURL);
-        const datos = await respuesta.json();
-        this.paginas = datos.paginas; // Guardamos todas las páginas
-    }
-
-    /**
-     * Limpia los resultados anteriores
-     */
-    limpiar() {
-        this.lista.innerHTML = "";
-        this.seccionResultados.hidden = true; // Oculta la sección si no hay resultados
-    }
-
-    /**
-     * Extrae solo el texto visible de un HTML
-     * @param {string} html - código HTML de la página
-     * @returns {string} texto visible en minúsculas
-     */
-    extraerTexto(html) {
-        const doc = new DOMParser().parseFromString(html, "text/html");
-        return doc.body.innerText.toLowerCase();
-    }
-
-    /**
-     * Devuelve fragmentos de texto donde aparece la palabra
-     * y resalta la palabra con <mark>
-     * @param {string} texto - texto completo de la página
-     * @param {string} termino - palabra buscada
-     * @returns {Array<string>} array de fragmentos con palabra resaltada
-     */
-    obtenerFragmentos(texto, termino) {
-        const fragmentos = [];
-        let pos = texto.indexOf(termino);
-
-        while (pos !== -1) {
-            // Tomamos un fragmento de +-30 caracteres alrededor de la palabra
-            const inicio = Math.max(0, pos - 30);
-            const fin = Math.min(texto.length, pos + termino.length + 30);
-            let frag = texto.substring(inicio, fin);
-
-            // Resaltamos la coincidencia con <mark>
-            const regex = new RegExp(termino, "gi");
-            frag = frag.replace(regex, match => `<mark>${match}</mark>`);
-
-            fragmentos.push(frag);
-            pos = texto.indexOf(termino, pos + 1); // Buscar siguiente ocurrencia
+        try {
+            const res = await fetch(this.mapaURL);
+            const data = await res.json();
+            this.paginas = data.paginas;
+        } catch (e) {
+            console.error("Error cargando mapa:", e);
         }
+    }
+
+    async cargarPaginas() {
+        for (const url of this.paginas) {
+            try {
+                const res = await fetch(url);
+                const html = await res.text();
+                this.contenidos[url] = this.limpiarHTML(html);
+            } catch (e) {
+                this.contenidos[url] = "";
+            }
+        }
+    }
+
+    limpiarHTML(html) {
+        return html.replace(/<script[\s\S]*?<\/script>/gi, "")
+                   .replace(/<style[\s\S]*?<\/style>/gi, "")
+                   .replace(/<[^>]+>/g, " ")
+                   .replace(/\s+/g, " ")
+                   .trim();
+    }
+
+    normalizar(texto) {
+        return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    buscar(query) {
+        const palabras = query.split(/\s+/).map(p => this.normalizar(p)).filter(Boolean);
+        const resultados = [];
+
+        for (const url of this.paginas) {
+            const textoOriginal = this.contenidos[url];
+            const textoNorm = this.normalizar(textoOriginal);
+            const coincidencias = [];
+
+            for (const palabra of palabras) {
+                let idx = textoNorm.indexOf(palabra);
+                while (idx !== -1) {
+                    coincidencias.push({ palabra, indice: idx, longitud: palabra.length });
+                    idx = textoNorm.indexOf(palabra, idx + 1);
+                }
+            }
+
+            if (coincidencias.length > 0) {
+                resultados.push({
+                    url,
+                    titulo: url.replace(".html", ""),
+                    textoOriginal,
+                    coincidencias
+                });
+            }
+        }
+
+        return resultados;
+    }
+
+    marcarTexto(original, coincidencias) {
+        let texto = original;
+        const normalizado = this.normalizar(original);
+
+        // ordenar descendente para no romper índices
+        coincidencias.sort((a, b) => b.indice - a.indice);
+
+        for (const c of coincidencias) {
+            const inicio = c.indice;
+            const fin = inicio + c.longitud;
+            texto = texto.slice(0, inicio) + "<mark>" + texto.slice(inicio, fin) + "</mark>" + texto.slice(fin);
+        }
+
+        return texto;
+    }
+
+    mostrarResultados(resultados) {
+        const section = document.querySelector("section.resultados");
+        if (!section) return;
+        const ul = section.querySelector("ul");
+        ul.innerHTML = "";
+
+        if (resultados.length === 0) {
+            ul.innerHTML = "<li>No se encontraron resultados.</li>";
+            section.hidden = false;
+            return;
+        }
+
+        resultados.forEach(r => {
+            const li = document.createElement("li");
+
+            const a = document.createElement("a");
+            a.href = r.url;
+            a.innerHTML = `<strong>${r.titulo.charAt(0).toUpperCase() + r.titulo.slice(1)}</strong>`;
+            li.appendChild(a);
+
+            const ulFrag = document.createElement("ul");
+            
+            const palabrasOriginales = this.query.trim().split(/\s+/);
+            const fragmentos = this.generarFragmentos(r.textoOriginal, r.coincidencias, palabrasOriginales);
+
+            fragmentos.forEach(f => {
+                const liFrag = document.createElement("li");
+                liFrag.innerHTML = f;
+                ulFrag.appendChild(liFrag);
+            });
+
+            li.appendChild(ulFrag);
+            ul.appendChild(li);
+        });
+
+        section.hidden = false;
+    }
+
+    generarFragmentos(textoOriginal, coincidencias, palabrasOriginales) {
+        const fragmentos = [];
+        const normalizado = this.normalizar(textoOriginal);
+
+        // Crear fragmentos base alrededor de cada coincidencia
+        let tempFrags = coincidencias.map(c => {
+            const inicio = Math.max(0, c.indice - 40);
+            const fin = Math.min(textoOriginal.length, c.indice + c.longitud + 40);
+            return { inicio, fin };
+        });
+
+        // Combinar fragmentos que se solapan
+        tempFrags.sort((a,b) => a.inicio - b.inicio);
+        const combinados = [];
+        tempFrags.forEach(f => {
+            if (!combinados.length) {
+                combinados.push(f);
+            } else {
+                const last = combinados[combinados.length - 1];
+                if (f.inicio <= last.fin) {
+                    // unir fragmentos solapados
+                    last.fin = Math.max(last.fin, f.fin);
+                } else {
+                    combinados.push(f);
+                }
+            }
+        });
+
+        // Para cada fragmento combinado, resaltar TODAS las palabras
+        combinados.forEach(frag => {
+            let fragOriginal = textoOriginal.slice(frag.inicio, frag.fin);
+            let fragNorm = this.normalizar(fragOriginal);
+
+            palabrasOriginales.forEach(p => {
+                const palabraNorm = this.normalizar(p);
+                let idx = fragNorm.indexOf(palabraNorm);
+                while(idx !== -1) {
+                    fragOriginal = fragOriginal.slice(0, idx) + "<mark>" + fragOriginal.slice(idx, idx + p.length) + "</mark>" + fragOriginal.slice(idx + p.length);
+                    
+                    // actualizar fragNorm para seguir buscando
+                    fragNorm = this.normalizar(fragOriginal);
+                    idx = fragNorm.indexOf(palabraNorm, idx + "<mark></mark>".length + p.length);
+                }
+            });
+
+            fragmentos.push(fragOriginal + "...");
+        });
 
         return fragmentos;
     }
 
-    /**
-     * Comprueba si todos los términos están presentes (AND implícito)
-     * @param {string} texto - texto de la página
-     * @returns {boolean} true si todos los términos aparecen
-     */
-    coincideBusqueda(texto) {
-        return this.terminos.every(t => texto.includes(t));
-    }
 
-    /**
-     * Agrega un resultado en la lista de resultados
-     * Cada resultado es clicable y lleva a la página correspondiente
-     * @param {string} pagina - página donde se encontró la palabra
-     * @param {Array<string>} fragmentos - array de fragmentos con palabra resaltada
-     */
-    agregarResultado(pagina, fragmentos) {
-        const li = document.createElement("li");
-
-        // Crear enlace clicable al nombre de la página
-        const a = document.createElement("a");
-        a.href = pagina;
-        a.innerHTML = `<strong>${pagina}</strong>`;
-        a.style.textDecoration = "none"; // opcional
-        a.style.color = "#1a0dab";       // estilo tipo Google
-        li.appendChild(a);
-
-        // Crear lista de fragmentos debajo del enlace
-        const ulFrag = document.createElement("ul");
-
-        // Evitar fragmentos duplicados
-        const fragmentsSet = new Set(fragmentos);
-        fragmentsSet.forEach(f => {
-            const liFrag = document.createElement("li");
-            liFrag.innerHTML = f;
-            ulFrag.appendChild(liFrag);
-        });
-
-        li.appendChild(ulFrag);
-        this.lista.appendChild(li);
-
-        // Mostrar la sección de resultados
-        this.seccionResultados.hidden = false;
-    }
-
-    traducirTextoPlano(texto, lang) {
-        const textos = window.I18N_TEXTS[lang];
-        if (!textos) return texto;
-
-        let traducido = texto;
-
-        // Reemplaza solo claves del buscador, no todo
-        const dic = textos.busquedaDiccionario || {};
-
-        for (const [es, en] of Object.entries(dic)) {
-            const regex = new RegExp(es.toLowerCase(), "gi");
-            traducido = traducido.replace(regex, en.toLowerCase());
-        }
-
-        return traducido;
-    }
-
-
-    /**
-     * Función principal que recorre todas las páginas
-     * y busca las coincidencias de los términos
-     */
-    async iniciar() {
-        this.limpiar();
-
-        for (const pagina of this.paginas) {
-            try {
-                // Cargar HTML de la página
-                const html = await fetch(pagina).then(r => r.text());
-                const texto = this.extraerTexto(html);
-
-                const textoProcesado = this.traducirTextoPlano(texto, window.langActual);
-
-                //Comprobar si coincide con todos los términos
-                if (!this.coincideBusqueda(textoProcesado)) continue;
-
-                //Generar fragmentos para cada término
-                let todosFragmentos = [];
-                for (const termino of this.terminos) {
-                    todosFragmentos.push(...this.obtenerFragmentos(textoProcesado, termino));
-                }
-
-                // Si hay fragmentos, agregarlos como resultado
-                if (todosFragmentos.length > 0) {
-                    this.agregarResultado(pagina, todosFragmentos);
-                }
-
-            } catch (err) {
-                console.error("Error cargando", pagina, err);
-            }
-        }
-    }
 }
+
+// inicialización automática
+new Buscador("mapa.json");
