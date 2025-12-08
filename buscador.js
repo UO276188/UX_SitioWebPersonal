@@ -125,6 +125,24 @@ class Buscador {
         this.seccionResultados.hidden = false;
     }
 
+    traducirTextoPlano(texto, lang) {
+        const textos = window.I18N_TEXTS[lang];
+        if (!textos) return texto;
+
+        let traducido = texto;
+
+        // Reemplaza solo claves del buscador, no todo
+        const dic = textos.busquedaDiccionario || {};
+
+        for (const [es, en] of Object.entries(dic)) {
+            const regex = new RegExp(es.toLowerCase(), "gi");
+            traducido = traducido.replace(regex, en.toLowerCase());
+        }
+
+        return traducido;
+    }
+
+
     /**
      * Función principal que recorre todas las páginas
      * y busca las coincidencias de los términos
@@ -138,13 +156,15 @@ class Buscador {
                 const html = await fetch(pagina).then(r => r.text());
                 const texto = this.extraerTexto(html);
 
+                const textoProcesado = this.traducirTextoPlano(texto, window.langActual);
+
                 //Comprobar si coincide con todos los términos
-                if (!this.coincideBusqueda(texto)) continue;
+                if (!this.coincideBusqueda(textoProcesado)) continue;
 
                 //Generar fragmentos para cada término
                 let todosFragmentos = [];
                 for (const termino of this.terminos) {
-                    todosFragmentos.push(...this.obtenerFragmentos(texto, termino));
+                    todosFragmentos.push(...this.obtenerFragmentos(textoProcesado, termino));
                 }
 
                 // Si hay fragmentos, agregarlos como resultado

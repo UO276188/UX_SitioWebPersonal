@@ -1,40 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Búsqueda</title>
-    <link rel="stylesheet" href="estilo.css">
+    <!-- Datos que describen el documento -->
+	<meta charset="UTF-8" />
+	
+	<!--Metadatos de los documentos HTML5-->
+	<meta name ="author" content ="Sara María Ramírez Pérez" />
+	<meta name ="description" content ="Página personal." />
+	<meta name ="keywords" content ="blog,personal" />
+
+	<!--Definición de la ventana gráfica-->
+	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
+	
+	<title data-i18n="busqueda.title">Mi página personal - Busqueda</title>
+
+	<!--Hojas de estilo-->
+	<link rel="stylesheet" type="text/css" href="estilo.css" />
+
+	<script type="module" src="/i18n/i18n.js"></script>
+	<script type="module" src="./menuActivo.js"></script>
 </head>
 
 <body>
     <header>
-        <h1>Resultados de búsqueda</h1>
-        
-        <form class="buscador" action="busqueda.html" method="get">
-            <label for="buscar">Buscar:</label>
-            <input type="search" name="q" placeholder="Buscar...">
-            <button type="submit" class="lupa">🔍</button>
-        </form>
-            
-        <p>
-            Idioma:
-            <button onclick="traduccion.setLanguage('es')">ES</button>
-            <button onclick="traduccion.setLanguage('en')">EN</button>
-        </p>
+        <h1 data-i18n="busqueda.heading">Resultados de la búsqueda</h1>
+
+		<form class="buscador" action="busqueda.html" method="get">
+			<label for="buscar" data-i18n="search.label">Buscar:</label>
+			<input type="search" name="q" data-i18n="search.placeholder" placeholder="Buscar...">
+			<button type="submit" class="lupa">🔍</button>
+		</form>
+		
+		<p data-i18n="lang.label">
+			Idioma:
+			<button data-lang="es">ES</button>
+			<button data-lang="en">EN</button>
+		</p>
     </header>
 
     <nav> 
 		<ul>
-			<li><a href="index.html" >Inicio</a></li>
-			<li><a href="aficiones.html" >Aficiones</a></li>
-			<li><a href="proyectos.html" >CV</a></li>
-			<li><a href="contacto.html" >Contacto</a></li>
+			<li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+			<li><a href="aficiones.html" data-i18n="nav.aficiones">Aficiones</a></li>
+			<li><a href="proyectos.html" data-i18n="nav.cv">CV</a></li>
+			<li><a href="contacto.html" data-i18n="nav.contacto">Contacto</a></li>
 		</ul>
 	</nav>
 
     <main>
         <section class="resultados" hidden>
-            <h2>Coincidencias</h2>
+            <h2 data-i18n="busqueda.coincidencias">Coincidencias</h2>
             <ul></ul>
         </section>
     </main>
@@ -45,5 +60,11 @@
         new Buscador("mapa.json", true);
     </script>
 
+    <footer>
+		<img src="multimedia/HTML5.png" alt="HTML5 Válido!" />
+		<img src="multimedia/CSS3.png"  alt="CSS Válido!"  />
+		<p data-i18n="footer.lastedit">Última edición: 7 Diciembre, 2025</p>
+		<p data-i18n="footer.copy">Copyright ©2025 Sara María Ramírez Pérez</p>
+	</footer>	
 </body>
 </html>

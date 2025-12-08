@@ -13,62 +13,65 @@
 	<!--Definición de la ventana gráfica-->
 	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
 	
-	<title>Mi página personal - Aficiones</title>
+	<title data-i18n="aficiones.title">Mi página personal - Aficiones</title>
 
 	<!--Hojas de estilo-->
 	<link rel="stylesheet" type="text/css" href="estilo.css" />
 
+	<script type="module" src="/i18n/i18n.js"></script>
 	<script type="module" src="./menuActivo.js"></script>
 	
 </head>
 
 <body>
 	<header> 
-		<h1>Mis aficiones</h1>
+		<h1 data-i18n="aficiones.heading">Mis aficiones</h1>
+		
 		<form class="buscador" action="busqueda.html" method="get">
-			<label for="buscar">Buscar:</label>
-			<input type="search" name="q" placeholder="Buscar...">
+			<label for="buscar" data-i18n="search.label">Buscar:</label>
+			<input type="search" name="q" data-i18n="search.placeholder" placeholder="Buscar...">
 			<button type="submit" class="lupa">🔍</button>
 		</form>
 		
-		<p>
+		<p data-i18n="lang.label">
 			Idioma:
-			<button onclick="traduccion.setLanguage('es')">ES</button>
-			<button onclick="traduccion.setLanguage('en')">EN</button>
+			<button data-lang="es">ES</button>
+			<button data-lang="en">EN</button>
 		</p>
 	</header>
 	
 	<nav> 
 		<ul>
-			<li><a href="index.html" >Inicio</a></li>
-			<li><a href="aficiones.html" >Aficiones</a></li>
-			<li><a href="proyectos.html" >CV</a></li>
-			<li><a href="contacto.html" >Contacto</a></li>
+			<li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+			<li><a href="aficiones.html" data-i18n="nav.aficiones">Aficiones</a></li>
+			<li><a href="proyectos.html" data-i18n="nav.cv">CV</a></li>
+			<li><a href="contacto.html" data-i18n="nav.contacto">Contacto</a></li>
 		</ul>
 	</nav>
 
 
 	<main>
-		<p>Mis dos grandes aficiones son la música y el deporte, donde practico padel jugando diferentes torneos a nivel regional.</p>
+		<p data-i18n="aficiones.intro">Mis dos grandes aficiones son la música y el deporte, donde practico padel jugando diferentes torneos a nivel regional.</p>
 
-		<h2>Últimos torneos de padel jugados</h2>
-		<p>En los dos últimos años he jugado los siguientes torneos de pádel.</p>
+		<h2 data-i18n="aficiones.torneosTitulo">Últimos torneos de padel jugados</h2>
+		<p data-i18n="aficiones.torneosIntro">En los dos últimos años he jugado los siguientes torneos de pádel.</p>
 		<ul>
-			<li>Torneo Adarsa - Septiembre 2024</li>
-			<li>Torneo WPC - Agosto 2024</li>
-			<li>Torneo de verano de Padel Oviedo - Julio 2024</li>
-			<li>Torneo de Navidad - Diciembre 2023</li>
-		</ul>
-		<h2>Grupos de música más escuchados</h2>
-		<p>El género de música que más escucho es el rock, pero últimamente mis playlists están llenas de indie.</p>
-		<ul>
-			<li>Mago de Oz</li>
-			<li>Arnau Griso</li>
-			<li>Arde Bogotá</li>
-			<li>Viva Suecia</li>
-			<li>IZAL</li>
-		</ul>
-		<video src="multimedia/magodeoz.mp4" controls preload="auto" aria-label="Concierto de Mago de Oz">
+			<li data-i18n="aficiones.torneos.0">Torneo Adarsa - Septiembre 2024</li>
+            <li data-i18n="aficiones.torneos.1">Torneo WPC - Agosto 2024</li>
+            <li data-i18n="aficiones.torneos.2">Torneo de verano de Padel Oviedo - Julio 2024</li>
+            <li data-i18n="aficiones.torneos.3">Torneo de Navidad - Diciembre 2023</li>
+        </ul>
+
+		<h2 data-i18n="aficiones.musicaTitulo">Grupos de música más escuchados</h2>
+        <p data-i18n="aficiones.musicaIntro">El género de música que más escucho es el rock, pero últimamente mis playlists están llenas de indie.</p>
+        <ul>
+            <li data-i18n="aficiones.musica.0">Mago de Oz</li>
+            <li data-i18n="aficiones.musica.1">Arnau Griso</li>
+            <li data-i18n="aficiones.musica.2">Arde Bogotá</li>
+            <li data-i18n="aficiones.musica.3">Viva Suecia</li>
+            <li data-i18n="aficiones.musica.4">IZAL</li>
+        </ul>
+		<video src="multimedia/magodeoz.mp4" controls preload="auto" aria-label="Concierto de Mago de Oz" data-i18n-alt="aficiones.videoAlt">
 			Your browser does not support the video tag.
 		</video>
 	</main>
@@ -76,8 +79,8 @@
 	<footer>
 		<img src="multimedia/HTML5.png" alt="HTML5 Válido!" />
 		<img src="multimedia/CSS3.png"  alt="CSS Válido!"  />
-		<p>ECW Septiembre, 2025</p>
-		<p>Copyright @2025 Sara María Ramírez Pérez</p>
-	</footer>	
+		<p data-i18n="footer.lastedit">Última edición: 7 Diciembre, 2025</p>
+		<p data-i18n="footer.copy">Copyright ©2025 Sara María Ramírez Pérez</p>
+	</footer>		
 </body>
 </html>

@@ -8,64 +8,70 @@
     <!--Definición de la ventana gráfica-->
 	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
 	
-	<title>Mi página personal - Contacto</title>
+	<title data-i18n="contacto.title">Mi página personal - Contacto</title>
 
 	<!--Hojas de estilo-->
 	<link rel="stylesheet" type="text/css" href="estilo.css" />
 
-    <script type="module" src="./menuActivo.js"></script>
+    <script type="module" src="/i18n/i18n.js"></script>
+	<script type="module" src="./menuActivo.js"></script>
 </head>
 
 <body>
     <header>
-        <h1>Contacto</h1>
+        <h1 data-i18n="contacto.heading">Contacto</h1>
+        
         <form class="buscador" action="busqueda.html" method="get">
-			<label for="buscar">Buscar:</label>
-			<input type="search" name="q" placeholder="Buscar...">
+			<label for="buscar" data-i18n="search.label">Buscar:</label>
+			<input type="search" name="q" data-i18n="search.placeholder" placeholder="Buscar...">
 			<button type="submit" class="lupa">🔍</button>
 		</form>
 		
-		<p>
+		<p data-i18n="lang.label">
 			Idioma:
-			<button onclick="traduccion.setLanguage('es')">ES</button>
-			<button onclick="traduccion.setLanguage('en')">EN</button>
+			<button data-lang="es">ES</button>
+			<button data-lang="en">EN</button>
 		</p>
     </header>
 
     <nav> 
 		<ul>
-			<li><a href="index.html" >Inicio</a></li>
-			<li><a href="aficiones.html" >Aficiones</a></li>
-			<li><a href="proyectos.html" >CV</a></li>
-			<li><a href="contacto.html" >Contacto</a></li>
+			<li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+			<li><a href="aficiones.html" data-i18n="nav.aficiones">Aficiones</a></li>
+			<li><a href="proyectos.html" data-i18n="nav.cv">CV</a></li>
+			<li><a href="contacto.html" data-i18n="nav.contacto">Contacto</a></li>
 		</ul>
 	</nav>
 
     <main>
         <!-- Información de contacto -->
         <section>
-            <h2>Información de contacto</h2>
-            <p>Email: <a href="mailto:uo276188@uniovi.es">uo276188@uniovi.es</a></p>
-            <p>Ubicación: Avilés, Asturias</p>
-            <p>Sígueme en redes sociales:</p>
+            <h2 data-i18n="contacto.infoTitulo">Información de contacto</h2>
+            <p data-i18n="contacto.nombre">Sara María Ramírez Pérez</p>
+            <p data-i18n="contacto.emailLabel">Email: <a href="mailto:uo276188@uniovi.es">uo276188@uniovi.es</a></p>
+            <p data-i18n="contacto.ubicacion">Ubicación: Avilés, Asturias</p>
+            <p data-i18n="contacto.redes">Sígueme en redes sociales:</p>
             <ul>
                 <li><a href="https://www.linkedin.com/in/sara-maría-ramírez-pérez" target="_blank">LinkedIn</a></li>
                 <li><a href="https://github.com/UO276188" target="_blank">GitHub</a></li>
             </ul>
         </section>
 
-        <!-- Formulario de retroalimentación -->
         <section>
-            <h2>Retroalimentación</h2>
-            <p>Para cualquier comentario, sugerencia o consulta, puedes enviarme un correo a <a href="mailto:uo276188@uniovi.es">uo276188@uniovi.es</a>.</p>
+            <h2 data-i18n="contacto.feedbackTitulo">Retroalimentación</h2>
+
+            <p data-i18n="contacto.feedbackTexto">
+                Para cualquier comentario, sugerencia o consulta, puedes enviarme un correo a 
+                <a href="mailto:uo276188@uniovi.es">uo276188@uniovi.es</a>.
+            </p>
         </section>
     </main>
 
     <footer>
         <img src="multimedia/HTML5.png" alt="HTML5 Válido!" />
-        <img src="multimedia/CSS3.png" alt="CSS Válido!" />
-        <p>ECW Septiembre, 2025</p>
-        <p>Copyright @2025 Sara María Ramírez Pérez</p>
+		<img src="multimedia/CSS3.png"  alt="CSS Válido!"  />
+		<p data-i18n="footer.lastedit">Última edición: 7 Diciembre, 2025</p>
+		<p data-i18n="footer.copy">Copyright ©2025 Sara María Ramírez Pérez</p>
     </footer>
 </body>
 </html>

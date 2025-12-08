@@ -13,7 +13,7 @@
 	<!--Definición de la ventana gráfica-->
 	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
 	
-	<title>Mi página personal - Inicio</title>
+	<title data-i18n="index.title">Mi página personal - Inicio</title>
 
 	<!--Hojas de estilo-->
 	<link rel="stylesheet" type="text/css" href="estilo.css" />
@@ -25,47 +25,46 @@
 
 <body>
 	<header> 
-		<h1>Mi página personal</h1>
+		<h1 data-i18n="index.heading">Mi página personal</h1>
+
 		<form class="buscador" action="busqueda.html" method="get">
-			<label for="buscar">Buscar:</label>
-			<input type="search" name="q" placeholder="Buscar...">
+			<label for="buscar" data-i18n="search.label">Buscar:</label>
+			<input type="search" name="q" data-i18n="search.placeholder" placeholder="Buscar...">
 			<button type="submit" class="lupa">🔍</button>
 		</form>
 		
-		<p>
+		<p data-i18n="lang.label">
 			Idioma:
-			<button onclick="traduccion.setLanguage('es')">ES</button>
-			<button onclick="traduccion.setLanguage('en')">EN</button>
+			<button data-lang="es">ES</button>
+			<button data-lang="en">EN</button>
 		</p>
 	</header>
 	
 	<nav> 
 		<ul>
-			<li><a href="index.html" >Inicio</a></li>
-			<li><a href="aficiones.html" >Aficiones</a></li>
-			<li><a href="proyectos.html" >CV</a></li>
-			<li><a href="contacto.html" >Contacto</a></li>
+			<li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+			<li><a href="aficiones.html" data-i18n="nav.aficiones">Aficiones</a></li>
+			<li><a href="proyectos.html" data-i18n="nav.cv">CV</a></li>
+			<li><a href="contacto.html" data-i18n="nav.contacto">Contacto</a></li>
 		</ul>
 	</nav>
 
 	<main>
-			
-		<h2>Datos Personales</h2>
-		<dl>
-			<dt>Nombre:</dt>
-			<dd>Sara María</dd>
-			<dt>Apellidos:</dt>
-			<dd>Ramírez Pérez</dd>
-			<dt>Correo electrónico:</dt>
-			<dd><a href="mailto:uo276188@uniovi.es">uo276188@uniovi.es</a></dd>
-			<dt>Más información:</dt>
-			<dd>Soy alumna del Máster en Ingeniería Web de la Universidad de Oviedo.</dd>
-		</dl>
+		<h2 data-i18n="index.section.welcome">Bienvenida</h2>
+
+		<p data-i18n="index.p1">¡Hola! Soy Sara.</p>
+
+		<p data-i18n="index.p2">Gracias por visitar mi página personal. Aquí encontrarás una visión general sobre mí, mis intereses, los proyectos en los que he trabajado y la forma en la que puedes ponerte en contacto conmigo.</p>
+
+		<p data-i18n="index.p3">Esta web ha sido diseñada como parte de mi formación en el Máster Universitario en Ingeniería Web de la Universidad de Oviedo, poniendo en práctica principios de accesibilidad, usabilidad y diseño responsivo.</p>
+
+		<p data-i18n="index.p4">Te invito a explorar el contenido y conocer un poco más sobre mí. ¡Espero que disfrutes la visita!</p>
+
 
 		<picture>
 			<source media="(max-width:799px)" srcset="multimedia/sara-200.jpg">
 			<source media="(min-width:800px)" srcset="multimedia/sara-600.jpg">
-			<img src="multimedia/sara.jpg" alt="Imagen personal" />
+			<img src="multimedia/sara.jpg" data-i18n-alt="index.alt.photo" alt="Imagen personal" />
 		</picture>
 		
 	</main>
@@ -73,8 +72,8 @@
 	<footer>
 		<img src="multimedia/HTML5.png" alt="HTML5 Válido!" />
 		<img src="multimedia/CSS3.png"  alt="CSS Válido!"  />
-		<p>Última edición: 7 Diciembre, 2025</p>
-		<p>Copyright @2025 Sara María Ramírez Pérez</p>
+		<p data-i18n="footer.lastedit">Última edición: 7 Diciembre, 2025</p>
+		<p data-i18n="footer.copy">Copyright ©2025 Sara María Ramírez Pérez</p>
 	</footer>	
 </body>
 </html>
