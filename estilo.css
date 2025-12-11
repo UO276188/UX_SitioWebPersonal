@@ -168,6 +168,13 @@ nav a[aria-current="page"] {
     color: #FDEAF2;
 }
 
+/* Video adaptable (responsive) */
+video {
+    max-width: 80%;
+    height: auto;
+    display: block;
+}
+
 /* Menú vertical en pantallas pequeñas usando RELATIVO (no px) */
 @media (max-width: 40em) { /* aprox 640px pero relativo al tamaño base */
     nav ul {
