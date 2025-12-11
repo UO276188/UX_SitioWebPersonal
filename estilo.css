@@ -16,7 +16,7 @@ body {
 	"nav main"
 	"footer footer";
 	column-gap: 1em;
-	row-gap: 1em;
+	/* row-gap: 1em; */
 }
 /*Especificidad: 002*/
 body header{
@@ -63,6 +63,12 @@ nav li{
 nav a{
 	background-color: #FDEAF2;
 	color: black;
+    display: inline-block;
+    padding: 0.75em 1.5em;   /* botones escalables según font-size */
+    text-decoration: none;
+    border-radius: 0.3em;    /* bordes relativos */
+    font-size: 1rem;
+    transition: all 0.3s ease;
 }
 
 /*Especificidad: 012*/
@@ -91,73 +97,19 @@ body footer img{
 	width: 5vw;
 }
 
-nav[aria-label="Migas de pan"] ol {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 0.5rem;
-}
-
-nav[aria-label="Migas de pan"] li::after {
-    content: ">";
-    margin-left: 0.5rem;
-}
-
-nav[aria-label="Migas de pan"] li:last-child::after {
-    content: "";
-}
-
-nav[aria-label="Migas de pan"] a {
-    text-decoration: none;
-    color: #007BFF;
-}
-
-nav[aria-label="Migas de pan"] a:hover {
-    text-decoration: underline;
-}
-
-/********** MENU RESPONSIVE MEJORADO (solo unidades relativas) **********/
-
-/* Menú general */
-body nav {
-    background-color: #FDEAF2;
-    color: black;
-    grid-area: nav;
-    justify-self: stretch;
-}
 
 /* Lista principal como flex */
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
     gap: 1em;                /* separación relativa */
-    flex-wrap: wrap;         /* se adapta automáticamente */
 }
 
-/* Cada elemento de lista */
-nav li {
-    padding: 0;
-}
-
-/* Enlaces del menú */
-nav a {
-    display: inline-block;
-    padding: 0.75em 1.5em;   /* botones escalables según font-size */
-    text-decoration: none;
-    background-color: #FDEAF2;
-    color: black;
-    border-radius: 0.3em;    /* bordes relativos */
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
 
 /* Hover / Focus */
 nav a:hover,
 nav a:focus {
-    color: #FDEAF2;
-    background-color: #670A30;
     font-weight: bold;
 }
 
